@@ -4,80 +4,143 @@
 // Utility
 @import "./utility.scss";
 
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
 body{
   font-family: 'Niramit', sans-serif;
-}
-
-h1, h2, h3{
-  color: #af0404;
+  background-color: #ececec;
 }
 
 .wrapper{
-  width: 100%;
-  padding: 50px 50px 100px 50px;
-
-  @include breakpoint('medium'){
-    max-width: 1000px;
-    padding: 200px 50px 100px 50px;
-  }
-
-  p{
-    text-align: justify;
+  h1, h2, h3{
+    color: rebeccapurple;
   }
 }
 
-header{
+#hero{
   width: 100%;
-  margin-bottom: 50px;
+  position: relative;
+  height: 300px;
 
-  @include breakpoint('medium'){
-    float: left;
-    padding-right: 100px;
-  }
+  ul{
+    position: absolute;
+    z-index: 2;
+    left: 20px;
+    top: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 50px;
 
-  .logo{
-    width: 100%;
-    img{
-      max-width: 290px;
-      float: left;
-    }
+    li{
+      display: grid;
+      grid-template-columns: 50px auto;
+      column-gap: 10px;
+      align-items: center;
+      font-weight: bold;
+      display: none;
 
-    @include breakpoint('medium'){
-      width: 300px;
-    }
-  }
-
-  .title{
-    width: 100%;
-
-    @include breakpoint('medium'){
-      width: calc(100% - 300px);
-      float: left;
-      margin-top: 70px;
-    }
-
-    span.title{
-      font-size: 4.5rem;
-      display: inline-block;
-      width: 100%;
-      color: #af0404;
-      @include breakpoint('medium'){
-        width: 100%;
-        // text-align: center;
+      &.active{
+        display: grid;
       }
-    }
 
-    span.tagline{
-      color: #af0404;
-      font-size: 1rem;
-      line-height: 1rem;
-      display: inline-block;
-
-      @include breakpoint('medium'){
-        width: 100%;
-        // text-align: center;
+      img{
+        width: 50px;
       }
     }
   }
 
+  h1{
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    padding: 5px 15px;
+    background-color: rgba(218, 218, 218, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
+  }
+}
+
+#menu{
+  position: relative;
+  z-index: 2;
+  padding: 60px;
+  font-size: rem-calc(22);
+  top: -100px;
+
+  p{
+    margin-bottom: 60px;
+  }
+
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li{
+      display: inline-block;
+      background-color: rgb(255, 187, 0);
+      border-radius: 50%;
+      margin-right: 40px;
+      transition: all .2s;
+      position: relative;
+
+      &:last-child{
+        background-color: hotpink;
+      }
+
+      img{
+        width: 150px;
+      }
+
+      &:hover{
+        transform: scale(1.1);
+      }
+
+      .label{
+        position: absolute;
+        bottom: -40px;
+        left: calc(50% - 25px);
+      }
+    }
+  }
+}
+
+#call_prompt{
+  width: 100%;
+  padding: 50px;
+  display: none;
+
+  &.active{
+    display: block;
+  }
+
+  .call_cta{
+    color: white;
+    display: grid;
+    grid-template-columns: auto 50px;
+    column-gap: 20px;
+    width: 240px;
+    background-color: hotpink;
+    align-items: center;
+    padding: 10px 40px;
+    border-radius: 5px;
+    transition: all .2s;
+
+    span.label{
+      font-weight: bold;
+      justify-self: center;
+    }
+
+    &[href="#call_ryan"]{
+      color: #5f5f5f;
+      background-color: rgb(255, 187, 0);
+    }
+
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
 }
