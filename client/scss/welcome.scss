@@ -4,7 +4,8 @@
 // Utility
 @import "./utility.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 
 body{
   font-family: 'Niramit', sans-serif;
@@ -20,7 +21,8 @@ body{
 #hero{
   width: 100%;
   position: relative;
-  height: 300px;
+  height: 200px;
+  background-color: rgb(230, 209, 29);
 
   ul{
     position: absolute;
@@ -53,23 +55,27 @@ body{
 
   h1{
     position: absolute;
-    top: 50%;
+    top: calc(50%);
+    width: 100%;
+    text-align: center;
     z-index: 2;
     padding: 5px 15px;
-    background-color: rgba(218, 218, 218, 0.5);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: bold;
+    letter-spacing: 1.2px;
+    font-family: 'Anton', sans-serif;
+    font-size: rem-calc(18);
   }
 }
 
 #menu{
   position: relative;
   z-index: 2;
-  padding: 60px;
+  padding: 20px;
   font-size: rem-calc(22);
-  top: -100px;
+  text-align: center;
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
 
   p{
     margin-bottom: 60px;
@@ -79,12 +85,15 @@ body{
     list-style: none;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     li{
+      justify-self: center;
       display: inline-block;
+      width: 130px;
       background-color: rgb(255, 187, 0);
       border-radius: 50%;
-      margin-right: 40px;
       transition: all .2s;
       position: relative;
 
@@ -93,7 +102,7 @@ body{
       }
 
       img{
-        width: 150px;
+        width: 130px;
       }
 
       &:hover{
@@ -112,6 +121,9 @@ body{
 #call_prompt{
   width: 100%;
   padding: 20px;
+  padding-top: 50px;
+  max-width: 375px;
+  margin: 0 auto;
 
   .call_cta{
     color: white;
@@ -124,6 +136,7 @@ body{
     padding: 10px 40px;
     border-radius: 5px;
     transition: all .2s;
+    margin: 0 auto;
 
     span.label{
       font-weight: bold;
@@ -138,5 +151,160 @@ body{
     &:hover{
       transform: scale(1.1);
     }
+  }
+}
+
+#calling_block, #ringing_block, #ongoing_call{
+  width: 100%;
+  margin: 0 auto;
+  max-width: 375px;
+
+  .calling_element{
+    position: relative;
+
+    &:after{
+      position: absolute;
+      content: ' ';
+      z-index: 2;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,1) 6%, rgba(45,45,45,0.5872724089635855) 75%, rgba(255,255,255,0) 100%);
+    }
+
+    .label{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+      text-align: center;
+      font-size: rem-calc(18);
+      font-weight: bold;
+      color: white;
+      top: 40%;
+    }
+
+
+    .hangup{
+      position: absolute;
+      z-index: 3;
+      display: block;
+      background-color: red;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      color: white;
+      font-size: rem-calc(32);
+      bottom: 30px;
+      left: calc(50% - 25px);
+      border-radius: 50%;
+      transition: all .2s;
+
+      &:hover{
+        background-color: crimson;
+      }
+
+    }
+
+    .pickup{
+      position: absolute;
+      z-index: 3;
+      display: block;
+      background-color: rgb(0, 255, 0);
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      color: white;
+      font-size: rem-calc(32);
+      bottom: 30px;
+      left: calc(50% - 25px);
+      border-radius: 50%;
+      transition: all .2s;
+
+      &:hover{
+        background-color: rgb(121, 221, 39);
+      }
+    }
+
+    .mute, .camera{
+      position: absolute;
+      z-index: 3;
+      display: block;
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      color: black;
+      font-size: rem-calc(32);
+      bottom: 30px;
+      left: calc(50% - 25px);
+      border-radius: 50%;
+      transition: all .2s;
+
+      &:hover, &.active{
+        background-color: red;
+        color: white;
+      }
+    }
+
+    .buttons{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+      .hangup{
+        left: 30%;
+      }
+
+      .pickup{
+        left: unset;
+        right: 30%;
+      }
+    }
+
+    .buttons_ongoing{
+      .mute{
+        left: 30px;
+      }
+
+      .camera{
+        left: unset;
+        right: 30px;
+      }
+    }
+  }
+}
+
+#ongoing_call{
+  background-color: black;
+  display: none;
+
+  &.active{
+    display: block;
+  }
+
+  .calling_element{
+    &:after{
+      display: none;
+    }
+  }
+
+  .video{
+    position: relative;
+  }
+
+  #remote_video{
+    width: 100%;
+  }
+
+  #local_video{
+    width: 30%;
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    left: 15px;
   }
 }

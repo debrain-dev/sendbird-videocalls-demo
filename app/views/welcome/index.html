@@ -5,7 +5,23 @@
 
   </div>
 
-  <div class="callElement">
-
-  </div>
+  <section id="ongoing_call">
+    <div class="calling_element">
+      <div class="video">
+        <video id="remote_video"></video>
+        <video id="local_video"></video>
+      </div>
+      <div class="buttons_ongoing">
+        <a class="mute">
+          <i class="mdi mdi-microphone-off"></i>
+        </a>
+        <a class="camera">
+          <i class="mdi mdi-video"></i>
+        </a>
+        <a class="hangup" onclick="javascript:window.app.endCallStatic()">
+          <i class="mdi mdi-phone-hangup"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 {% endblock %}
