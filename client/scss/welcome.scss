@@ -31,6 +31,7 @@ body{
     margin: 0;
     padding: 0;
     height: 50px;
+    width: 300px;
 
     li{
       display: grid;
@@ -110,12 +111,7 @@ body{
 
 #call_prompt{
   width: 100%;
-  padding: 50px;
-  display: none;
-
-  &.active{
-    display: block;
-  }
+  padding: 20px;
 
   .call_cta{
     color: white;
@@ -134,7 +130,7 @@ body{
       justify-self: center;
     }
 
-    &[href="#call_ryan"]{
+    &.ryan{
       color: #5f5f5f;
       background-color: rgb(255, 187, 0);
     }
