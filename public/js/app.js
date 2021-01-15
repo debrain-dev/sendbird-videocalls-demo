@@ -451,42 +451,15 @@ window.app = {
 
       _this3.tpl();
     });
-
-    this.call.onEstablished = function (__call) {
-      console.log('Information: call stablished!', __call);
-    };
-
-    this.call.onConnected = function (__call) {
-      console.log('Information: call connected!', __call);
-      _this3.config.status = 'ongoing';
-
-      _this3.tpl();
-
-      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
-    };
-
-    this.call.onEnded = function (__call) {
-      console.log('Information: call ended!', __call);
-
-      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
-
-      _this3.config.status = 'ready';
-
-      _this3.tpl();
-    };
-
-    this.call.onRemoteAudioSettingsChanged = function (__call) {
-      console.log('Information: remote audio settings changed!', __call);
-    };
-
-    this.call.onRemoteVideoSettingsChanged = function (__call) {
-      console.log('Information: remote video settings changed!', __call);
-    };
+    this.attachCallEvents();
   },
   handleIncomingCall: function handleIncomingCall() {
-    var _this4 = this;
-
     this.config.status = 'ringing';
+    this.attachCallEvents();
+    this.tpl();
+  },
+  attachCallEvents: function attachCallEvents() {
+    var _this4 = this;
 
     this.call.onEstablished = function (__call) {
       console.log('Information: call stablished!', __call);
@@ -518,8 +491,6 @@ window.app = {
     this.call.onRemoteVideoSettingsChanged = function (__call) {
       console.log('Information: remote video settings changed!', __call);
     };
-
-    this.tpl();
   },
   pickupCall: function pickupCall(e) {
     e.preventDefault();
