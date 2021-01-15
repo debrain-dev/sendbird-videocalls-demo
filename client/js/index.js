@@ -38,7 +38,8 @@ window.app = {
 
     SendBirdCall.addListener(1, {
       onRinging: (_call) => {
-        this.handleIncomingCall(_call);
+        this.call = _call;
+        this.handleIncomingCall();
       }
     });
 
@@ -78,28 +79,6 @@ window.app = {
     this.tpl();
   },
 
-  onEstablished(_call) {
-    console.log('Information: call stablished!', _call);
-  },
-
-  onConnected(_call) {
-    console.log('Information: call connected!', _call);
-    this.config.status = 'ongoing';
-    this.tpl();
-    __.qs('#ongoing_call').classList.add('active');
-  },
-
-  onEnded(_call) {
-    console.log('Information: call ended!', _call);
-    __.qs('#ongoing_call').classList.remove('active');
-    this.config.status = 'ready';
-    this.tpl();
-  },
-
-  onRemoteAudioSettingsChanged(_call) {
-    console.log('Information: remote audio settings changed!', _call);
-  },
-
   onRemoteVideoSettingsChanged(_call) {
     console.log('Information: remote video settings changed!', _call);
   },
@@ -108,7 +87,7 @@ window.app = {
     e.preventDefault();
     this.dialParams.userId = callee;
 
-    const call = SendBirdCall.dial(this.dialParams, (_call, error) => {
+    this.call = SendBirdCall.dial(this.dialParams, (_call, error) => {
       if (error) {
         console.log('Information: there was an error making the call');
       }
@@ -118,56 +97,68 @@ window.app = {
       this.tpl();
     });
 
-    call.onEstablished = (_call) => {
-      this.onEstablished(_call);
+    this.call.onEstablished = (__call) => {
+      console.log('Information: call stablished!', __call);
     };
 
-    call.onConnected = (_call) => {
-      this.onConnected(_call);
+    this.call.onConnected = (__call) => {
+      console.log('Information: call connected!', __call);
+      this.config.status = 'ongoing';
+      this.tpl();
+      __.qs('#ongoing_call').classList.add('active');
     };
 
-    call.onEnded = (_call) => {
-      this.onEnded(_call);
+    this.call.onEnded = (__call) => {
+      console.log('Information: call ended!', __call);
+      __.qs('#ongoing_call').classList.remove('active');
+      this.config.status = 'ready';
+      this.tpl();
     };
 
-    call.onRemoteAudioSettingsChanged = (_call) => {
-      this.onRemoteAudioSettingsChanged(_call);
+    this.call.onRemoteAudioSettingsChanged = (__call) => {
+      console.log('Information: remote audio settings changed!', __call);
     };
 
-    call.onRemoteVideoSettingsChanged = (_call) => {
-      this.onRemoteVideoSettingsChanged(_call);
+    this.call.onRemoteVideoSettingsChanged = (__call) => {
+      console.log('Information: remote video settings changed!', __call);
     };
-
-    this.call = call;
   },
 
-  handleIncomingCall(call) {
+  handleIncomingCall() {
     this.config.status = 'ringing';
 
-    const _call = call;
-
-    _call.onEstablished = (__call) => {
-      this.onEstablished(__call);
+    this.call.onEstablished = (__call) => {
+      console.log('Information: call stablished!', __call);
     };
 
-    _call.onConnected = (__call) => {
-      this.onConnected(__call);
+    this.call.onConnected = (__call) => {
+      console.log('Information: call connected!', __call);
+      this.config.status = 'ongoing';
+      this.tpl();
+      __.qs('#ongoing_call').classList.add('active');
     };
 
-    _call.onEnded = (__call) => {
-      this.onEnded(__call);
+    this.call.onEnded = (__call) => {
+      console.log('Information: call ended!', __call);
+      __.qs('#ongoing_call').classList.remove('active');
+      this.config.status = 'ready';
+      this.tpl();
     };
 
-    _call.onRemoteAudioSettingsChanged = (__call) => {
-      this.onRemoteAudioSettingsChanged(__call);
+    this.call.onRemoteAudioSettingsChanged = (__call) => {
+      console.log('Information: remote audio settings changed!', __call);
     };
 
-    _call.onRemoteVideoSettingsChanged = (__call) => {
-      this.onRemoteVideoSettingsChanged(__call);
+    this.call.onRemoteVideoSettingsChanged = (__call) => {
+      console.log('Information: remote video settings changed!', __call);
     };
 
-    this.call = _call;
     this.tpl();
+  },
+
+  pickupCall(e) {
+    e.preventDefault();
+    this.call.accept(this.acceptParams);
   },
 
   endCall(e) {
@@ -179,11 +170,6 @@ window.app = {
     this.config.status = 'ready';
     this.call.end();
     this.tpl();
-  },
-
-  pickupCall(e) {
-    e.preventDefault();
-    this.call.accept(this.acceptParams);
   },
 
   tpl() {

@@ -393,7 +393,9 @@ window.app = {
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTED, '/audio/reconnected.mp3');
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addListener(1, {
       onRinging: function onRinging(_call) {
-        _this.handleIncomingCall(_call);
+        _this.call = _call;
+
+        _this.handleIncomingCall();
       }
     });
     this.tpl();
@@ -431,27 +433,6 @@ window.app = {
     this.config.status = 'logout';
     this.tpl();
   },
-  onEstablished: function onEstablished(_call) {
-    console.log('Information: call stablished!', _call);
-  },
-  onConnected: function onConnected(_call) {
-    console.log('Information: call connected!', _call);
-    this.config.status = 'ongoing';
-    this.tpl();
-
-    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
-  },
-  onEnded: function onEnded(_call) {
-    console.log('Information: call ended!', _call);
-
-    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
-
-    this.config.status = 'ready';
-    this.tpl();
-  },
-  onRemoteAudioSettingsChanged: function onRemoteAudioSettingsChanged(_call) {
-    console.log('Information: remote audio settings changed!', _call);
-  },
   onRemoteVideoSettingsChanged: function onRemoteVideoSettingsChanged(_call) {
     console.log('Information: remote video settings changed!', _call);
   },
@@ -460,7 +441,7 @@ window.app = {
 
     e.preventDefault();
     this.dialParams.userId = callee;
-    var call = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.dial(this.dialParams, function (_call, error) {
+    this.call = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.dial(this.dialParams, function (_call, error) {
       if (error) {
         console.log('Information: there was an error making the call');
       }
@@ -471,56 +452,78 @@ window.app = {
       _this3.tpl();
     });
 
-    call.onEstablished = function (_call) {
-      _this3.onEstablished(_call);
+    this.call.onEstablished = function (__call) {
+      console.log('Information: call stablished!', __call);
     };
 
-    call.onConnected = function (_call) {
-      _this3.onConnected(_call);
+    this.call.onConnected = function (__call) {
+      console.log('Information: call connected!', __call);
+      _this3.config.status = 'ongoing';
+
+      _this3.tpl();
+
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
     };
 
-    call.onEnded = function (_call) {
-      _this3.onEnded(_call);
+    this.call.onEnded = function (__call) {
+      console.log('Information: call ended!', __call);
+
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
+
+      _this3.config.status = 'ready';
+
+      _this3.tpl();
     };
 
-    call.onRemoteAudioSettingsChanged = function (_call) {
-      _this3.onRemoteAudioSettingsChanged(_call);
+    this.call.onRemoteAudioSettingsChanged = function (__call) {
+      console.log('Information: remote audio settings changed!', __call);
     };
 
-    call.onRemoteVideoSettingsChanged = function (_call) {
-      _this3.onRemoteVideoSettingsChanged(_call);
+    this.call.onRemoteVideoSettingsChanged = function (__call) {
+      console.log('Information: remote video settings changed!', __call);
     };
-
-    this.call = call;
   },
-  handleIncomingCall: function handleIncomingCall(call) {
+  handleIncomingCall: function handleIncomingCall() {
     var _this4 = this;
 
     this.config.status = 'ringing';
-    var _call = call;
 
-    _call.onEstablished = function (__call) {
-      _this4.onEstablished(__call);
+    this.call.onEstablished = function (__call) {
+      console.log('Information: call stablished!', __call);
     };
 
-    _call.onConnected = function (__call) {
-      _this4.onConnected(__call);
+    this.call.onConnected = function (__call) {
+      console.log('Information: call connected!', __call);
+      _this4.config.status = 'ongoing';
+
+      _this4.tpl();
+
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
     };
 
-    _call.onEnded = function (__call) {
-      _this4.onEnded(__call);
+    this.call.onEnded = function (__call) {
+      console.log('Information: call ended!', __call);
+
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
+
+      _this4.config.status = 'ready';
+
+      _this4.tpl();
     };
 
-    _call.onRemoteAudioSettingsChanged = function (__call) {
-      _this4.onRemoteAudioSettingsChanged(__call);
+    this.call.onRemoteAudioSettingsChanged = function (__call) {
+      console.log('Information: remote audio settings changed!', __call);
     };
 
-    _call.onRemoteVideoSettingsChanged = function (__call) {
-      _this4.onRemoteVideoSettingsChanged(__call);
+    this.call.onRemoteVideoSettingsChanged = function (__call) {
+      console.log('Information: remote video settings changed!', __call);
     };
 
-    this.call = _call;
     this.tpl();
+  },
+  pickupCall: function pickupCall(e) {
+    e.preventDefault();
+    this.call.accept(this.acceptParams);
   },
   endCall: function endCall(e) {
     e.preventDefault();
@@ -530,10 +533,6 @@ window.app = {
     this.config.status = 'ready';
     this.call.end();
     this.tpl();
-  },
-  pickupCall: function pickupCall(e) {
-    e.preventDefault();
-    this.call.accept(this.acceptParams);
   },
   tpl: function tpl() {
     var _this5 = this;
