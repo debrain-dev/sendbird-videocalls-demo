@@ -281,6 +281,7 @@ body{
 #ongoing_call{
   background-color: black;
   display: none;
+  max-width: 640px;
 
   &.active{
     display: block;
