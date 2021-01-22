@@ -143,7 +143,7 @@ window.app = {
         });
         */
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
           .then((mediaStream) => {
             const stream = mediaStream;
             const tracks = stream.getTracks();

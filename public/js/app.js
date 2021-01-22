@@ -507,7 +507,7 @@ window.app = {
         */
         navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: false
+          audio: true
         }).then(function (mediaStream) {
           var stream = mediaStream;
           var tracks = stream.getTracks();
