@@ -462,11 +462,7 @@ window.app = {
     var _this4 = this;
 
     this.call.onEstablished = function (__call) {
-      console.log('Information: call stablished!', __call); // stop the microphone and camera
-
-      _this4.call.muteMicrophone();
-
-      _this4.call.stopVideo();
+      console.log('Information: call stablished!', __call);
     };
 
     this.call.onConnected = function (__call) {

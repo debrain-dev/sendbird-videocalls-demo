@@ -109,10 +109,6 @@ window.app = {
   attachCallEvents() {
     this.call.onEstablished = (__call) => {
       console.log('Information: call stablished!', __call);
-
-      // stop the microphone and camera
-      this.call.muteMicrophone();
-      this.call.stopVideo();
     };
 
     this.call.onConnected = (__call) => {
