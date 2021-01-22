@@ -489,6 +489,10 @@ window.app = {
       _this4.call.unmuteMicrophone();
 
       ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
+
+      if (_this4.isSafari()) {
+        ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#remote_video').play();
+      }
     };
 
     this.call.onEnded = function (__call) {

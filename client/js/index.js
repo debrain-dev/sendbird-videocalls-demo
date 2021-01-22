@@ -130,6 +130,10 @@ window.app = {
       this.call.unmuteMicrophone();
 
       __.qs('#ongoing_call').classList.add('active');
+
+      if (this.isSafari()) {
+        __.qs('#remote_video').play();
+      }
     };
 
     this.call.onEnded = (__call) => {
