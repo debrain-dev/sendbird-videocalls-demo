@@ -388,13 +388,7 @@ window.app = {
         audioEnabled: true,
         videoEnabled: true
       }
-    }; // sendbird calls
-
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.init(this.config.sb_app_id);
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
+    };
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addListener(1, {
       onRinging: function onRinging(_call) {
         _this.call = _call;
@@ -412,7 +406,13 @@ window.app = {
 
     e.preventDefault();
     this.config.user = persona;
-    this.tpl();
+    this.tpl(); // sendbird calls
+
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.init(this.config.sb_app_id);
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
     var authOption = {
       userId: persona,
       accessToken: this.config.sb_token,

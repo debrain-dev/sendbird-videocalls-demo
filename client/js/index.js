@@ -33,13 +33,6 @@ window.app = {
       }
     };
 
-    // sendbird calls
-    SendBirdCall.init(this.config.sb_app_id);
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
-
     SendBirdCall.addListener(1, {
       onRinging: (_call) => {
         this.call = _call;
@@ -58,6 +51,13 @@ window.app = {
     e.preventDefault();
     this.config.user = persona;
     this.tpl();
+
+    // sendbird calls
+    SendBirdCall.init(this.config.sb_app_id);
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
 
     const authOption = {
       userId: persona,
