@@ -389,6 +389,7 @@ window.app = {
         videoEnabled: true
       }
     };
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.init(this.config.sb_app_id);
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addListener(1, {
       onRinging: function onRinging(_call) {
         _this.call = _call;
@@ -408,7 +409,6 @@ window.app = {
     this.config.user = persona;
     this.tpl(); // sendbird calls
 
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.init(this.config.sb_app_id);
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');

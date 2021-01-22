@@ -33,6 +33,7 @@ window.app = {
       }
     };
 
+    SendBirdCall.init(this.config.sb_app_id);
     SendBirdCall.addListener(1, {
       onRinging: (_call) => {
         this.call = _call;
@@ -53,7 +54,6 @@ window.app = {
     this.tpl();
 
     // sendbird calls
-    SendBirdCall.init(this.config.sb_app_id);
     SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
     SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
     SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
