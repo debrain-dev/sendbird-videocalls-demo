@@ -362,8 +362,7 @@ window.app = {
   init: function init() {
     var _this = this;
 
-    if (this.isSafari()) {
-      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#remote_video').setAttribute('controls', true);
+    if (this.isSafari()) {// __.qs('#remote_video').setAttribute('controls', true);
     }
 
     this.config = {};

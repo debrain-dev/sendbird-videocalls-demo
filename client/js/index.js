@@ -6,7 +6,7 @@ import __ from './__';
 window.app = {
   init() {
     if (this.isSafari()) {
-      __.qs('#remote_video').setAttribute('controls', true);
+      // __.qs('#remote_video').setAttribute('controls', true);
     }
 
     this.config = {};
