@@ -440,6 +440,10 @@ window.app = {
     var _this3 = this;
 
     e.preventDefault();
+    this.usemedia = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.useMedia({
+      audio: true,
+      video: true
+    });
     this.dialParams.userId = callee;
     this.call = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.dial(this.dialParams, function (_call, error) {
       if (error) {
@@ -454,6 +458,10 @@ window.app = {
     this.attachCallEvents();
   },
   handleIncomingCall: function handleIncomingCall() {
+    this.usemedia = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.useMedia({
+      audio: true,
+      video: true
+    });
     this.config.status = 'ringing';
     this.attachCallEvents();
     this.tpl();
@@ -479,16 +487,33 @@ window.app = {
     this.call.onEnded = function (__call) {
       console.log('Information: call ended!', __call);
 
-      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active'); // stop the microphone and camera
-
-
-      _this4.call.muteMicrophone();
-
-      _this4.call.stopVideo();
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
 
       _this4.config.status = 'ready';
 
       _this4.tpl();
+
+      setTimeout(function () {
+        // stop the microphone and camera
+
+        /*
+        const video = document.querySelectorAll('video');
+        video.forEach((v) => {
+          console.log('entro');
+          const mediaStream = v.srcObject;
+          const tracks = mediaStream.getTracks();
+          tracks.forEach((track) => track.stop());
+        });
+        */
+        navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false
+        }).then(function (mediaStream) {
+          var stream = mediaStream;
+          var tracks = stream.getTracks();
+          tracks[0].stop();
+        });
+      }, 3000);
     };
 
     this.call.onRemoteAudioSettingsChanged = function (__call) {
@@ -501,6 +526,10 @@ window.app = {
   },
   pickupCall: function pickupCall(e) {
     e.preventDefault();
+    this.usemedia = sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.useMedia({
+      audio: true,
+      video: true
+    });
     this.call.accept(this.acceptParams);
   },
   endCall: function endCall() {

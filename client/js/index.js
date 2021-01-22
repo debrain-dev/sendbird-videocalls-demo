@@ -85,6 +85,8 @@ window.app = {
 
   startCall(e, callee) {
     e.preventDefault();
+    this.usemedia = SendBirdCall.useMedia({ audio: true, video: true });
+
     this.dialParams.userId = callee;
 
     this.call = SendBirdCall.dial(this.dialParams, (_call, error) => {
@@ -101,6 +103,7 @@ window.app = {
   },
 
   handleIncomingCall() {
+    this.usemedia = SendBirdCall.useMedia({ audio: true, video: true });
     this.config.status = 'ringing';
     this.attachCallEvents();
     this.tpl();
@@ -123,14 +126,31 @@ window.app = {
 
     this.call.onEnded = (__call) => {
       console.log('Information: call ended!', __call);
+
       __.qs('#ongoing_call').classList.remove('active');
-
-      // stop the microphone and camera
-      this.call.muteMicrophone();
-      this.call.stopVideo();
-
       this.config.status = 'ready';
       this.tpl();
+
+      setTimeout(() => {
+        // stop the microphone and camera
+        /*
+        const video = document.querySelectorAll('video');
+        video.forEach((v) => {
+          console.log('entro');
+          const mediaStream = v.srcObject;
+          const tracks = mediaStream.getTracks();
+          tracks.forEach((track) => track.stop());
+        });
+        */
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+          .then((mediaStream) => {
+            const stream = mediaStream;
+            const tracks = stream.getTracks();
+            tracks[0].stop();
+          });
+
+      }, 3000);
     };
 
     this.call.onRemoteAudioSettingsChanged = (__call) => {
@@ -144,6 +164,7 @@ window.app = {
 
   pickupCall(e) {
     e.preventDefault();
+    this.usemedia = SendBirdCall.useMedia({ audio: true, video: true });
     this.call.accept(this.acceptParams);
   },
 
