@@ -500,12 +500,7 @@ window.app = {
       ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
 
       _this4.config.status = 'ready';
-
-      _this4.tpl();
-
-      setTimeout(function () {
-        document.location.reload();
-      }, 1000);
+      document.location.reload(); // this.tpl();
     };
 
     this.call.onRemoteAudioSettingsChanged = function (__call) {

@@ -141,11 +141,8 @@ window.app = {
 
       __.qs('#ongoing_call').classList.remove('active');
       this.config.status = 'ready';
-      this.tpl();
-
-      setTimeout(() => {
-        document.location.reload();
-      }, 1000);
+      document.location.reload();
+      // this.tpl();
     };
 
     this.call.onRemoteAudioSettingsChanged = (__call) => {
