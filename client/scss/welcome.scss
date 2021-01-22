@@ -228,7 +228,7 @@ body{
       }
     }
 
-    .mute, .camera{
+    .mute, .camera, .unmute, .no-camera{
       position: absolute;
       z-index: 3;
       display: block;
@@ -266,11 +266,11 @@ body{
     }
 
     .buttons_ongoing{
-      .mute{
+      .mute, .unmute{
         left: 30px;
       }
 
-      .camera{
+      .camera, .no-camera{
         left: unset;
         right: 30px;
       }
@@ -307,5 +307,17 @@ body{
     z-index: 2;
     top: 15px;
     left: 15px;
+  }
+
+  .buttons_ongoing{
+    .mute, .unmute, .camera, .no-camera{
+      display: none;
+
+      &.active{
+        display: block;
+        background-color: white;
+        color: black;
+      }
+    }
   }
 }

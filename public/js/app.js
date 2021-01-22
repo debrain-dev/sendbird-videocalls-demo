@@ -503,14 +503,41 @@ window.app = {
     e.preventDefault();
     this.call.accept(this.acceptParams);
   },
-  endCall: function endCall(e) {
-    e.preventDefault();
+  endCall: function endCall() {
     this.endCallStatic();
   },
   endCallStatic: function endCallStatic() {
     this.config.status = 'ready';
     this.call.end();
     this.tpl();
+  },
+  muteStatic: function muteStatic() {
+    this.call.muteMicrophone();
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.mute').classList.remove('active');
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.unmute').classList.add('active');
+  },
+  unmuteStatic: function unmuteStatic() {
+    this.call.unmuteMicrophone();
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.unmute').classList.remove('active');
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.mute').classList.add('active');
+  },
+  muteVideoStatic: function muteVideoStatic() {
+    this.call.stopVideo();
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.camera').classList.remove('active');
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.no-camera').classList.add('active');
+  },
+  unmuteVideoStatic: function unmuteVideoStatic() {
+    this.call.startVideo();
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.no-camera').classList.remove('active');
+
+    ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('a.camera').classList.add('active');
   },
   tpl: function tpl() {
     var _this5 = this;

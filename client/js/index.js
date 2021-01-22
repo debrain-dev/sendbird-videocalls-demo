@@ -147,8 +147,7 @@ window.app = {
     this.call.accept(this.acceptParams);
   },
 
-  endCall(e) {
-    e.preventDefault();
+  endCall() {
     this.endCallStatic();
   },
 
@@ -156,6 +155,30 @@ window.app = {
     this.config.status = 'ready';
     this.call.end();
     this.tpl();
+  },
+
+  muteStatic() {
+    this.call.muteMicrophone();
+    __.qs('a.mute').classList.remove('active');
+    __.qs('a.unmute').classList.add('active');
+  },
+
+  unmuteStatic() {
+    this.call.unmuteMicrophone();
+    __.qs('a.unmute').classList.remove('active');
+    __.qs('a.mute').classList.add('active');
+  },
+
+  muteVideoStatic() {
+    this.call.stopVideo();
+    __.qs('a.camera').classList.remove('active');
+    __.qs('a.no-camera').classList.add('active');
+  },
+
+  unmuteVideoStatic() {
+    this.call.startVideo();
+    __.qs('a.no-camera').classList.remove('active');
+    __.qs('a.camera').classList.add('active');
   },
 
   tpl() {

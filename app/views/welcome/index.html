@@ -12,19 +12,19 @@
         <video id="local_video" autoplay muted></video>
       </div>
       <div class="buttons_ongoing">
-        <a class="mute">
-          <i class="mdi mdi-microphone-off"></i>
-        </a>
-        <a class="unmute">
+        <a class="mute active" onclick="window.app.muteStatic()">
           <i class="mdi mdi-microphone"></i>
         </a>
-        <a class="camera">
+        <a class="unmute" onclick="window.app.unmuteStatic()">
+          <i class="mdi mdi-microphone-off"></i>
+        </a>
+        <a class="camera active" onclick="window.app.muteVideoStatic()">
           <i class="mdi mdi-video"></i>
         </a>
-        <a class="no-camera">
+        <a class="no-camera" onclick="window.app.unmuteVideoStatic()">
           <i class="mdi mdi-video-off"></i>
         </a>
-        <a class="hangup" onclick="javascript:window.app.endCallStatic()">
+        <a class="hangup" onclick="window.app.endCall()">
           <i class="mdi mdi-phone-hangup"></i>
         </a>
       </div>
