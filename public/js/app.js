@@ -362,6 +362,10 @@ window.app = {
   init: function init() {
     var _this = this;
 
+    if (this.isSafari()) {
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#remote_video').setAttribute('controls', true);
+    }
+
     this.config = {};
     this.config.user = '';
     this.config.status = 'logout';
@@ -399,6 +403,9 @@ window.app = {
       }
     });
     this.tpl();
+  },
+  isSafari: function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   },
   pickPersona: function pickPersona(persona, e) {
     var _this2 = this;
@@ -495,23 +502,14 @@ window.app = {
 
       setTimeout(function () {
         // stop the microphone and camera
-
-        /*
-        const video = document.querySelectorAll('video');
-        video.forEach((v) => {
+        var video = document.querySelectorAll('video');
+        video.forEach(function (v) {
           console.log('entro');
-          const mediaStream = v.srcObject;
-          const tracks = mediaStream.getTracks();
-          tracks.forEach((track) => track.stop());
-        });
-        */
-        navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true
-        }).then(function (mediaStream) {
-          var stream = mediaStream;
-          var tracks = stream.getTracks();
-          tracks[0].stop();
+          var mediaStream = v.srcObject;
+          var tracks = mediaStream.getTracks();
+          tracks.forEach(function (track) {
+            return track.stop();
+          });
         });
       }, 3000);
     };

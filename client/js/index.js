@@ -5,6 +5,10 @@ import __ from './__';
 
 window.app = {
   init() {
+    if (this.isSafari()) {
+      __.qs('#remote_video').setAttribute('controls', true);
+    }
+
     this.config = {};
     this.config.user = '';
     this.config.status = 'logout';
@@ -44,6 +48,10 @@ window.app = {
     });
 
     this.tpl();
+  },
+
+  isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   },
 
   pickPersona(persona, e) {
@@ -133,7 +141,6 @@ window.app = {
 
       setTimeout(() => {
         // stop the microphone and camera
-        /*
         const video = document.querySelectorAll('video');
         video.forEach((v) => {
           console.log('entro');
@@ -141,14 +148,6 @@ window.app = {
           const tracks = mediaStream.getTracks();
           tracks.forEach((track) => track.stop());
         });
-        */
-
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-          .then((mediaStream) => {
-            const stream = mediaStream;
-            const tracks = stream.getTracks();
-            tracks[0].stop();
-          });
 
       }, 3000);
     };
