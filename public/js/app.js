@@ -387,10 +387,10 @@ window.app = {
     }; // sendbird calls
 
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.init(this.config.sb_app_id);
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.DIALING, '/audio/dialing.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RINGING, '/audio/ringing.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTING, '/audio/reconnecting.mp3');
-    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTED, '/audio/reconnected.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
+    sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addDirectCallSound(sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
     sendbird_calls__WEBPACK_IMPORTED_MODULE_1___default.a.addListener(1, {
       onRinging: function onRinging(_call) {
         _this.call = _call;
@@ -462,7 +462,11 @@ window.app = {
     var _this4 = this;
 
     this.call.onEstablished = function (__call) {
-      console.log('Information: call stablished!', __call);
+      console.log('Information: call stablished!', __call); // stop the microphone and camera
+
+      _this4.call.muteMicrophone();
+
+      _this4.call.stopVideo();
     };
 
     this.call.onConnected = function (__call) {
@@ -471,13 +475,20 @@ window.app = {
 
       _this4.tpl();
 
+      _this4.call.unmuteMicrophone();
+
       ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
     };
 
     this.call.onEnded = function (__call) {
       console.log('Information: call ended!', __call);
 
-      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active');
+      ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.remove('active'); // stop the microphone and camera
+
+
+      _this4.call.muteMicrophone();
+
+      _this4.call.stopVideo();
 
       _this4.config.status = 'ready';
 

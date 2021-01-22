@@ -31,10 +31,10 @@ window.app = {
 
     // sendbird calls
     SendBirdCall.init(this.config.sb_app_id);
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '/audio/dialing.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '/audio/ringing.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '/audio/reconnecting.mp3');
-    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '/audio/reconnected.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/dialing.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/ringing.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnecting.mp3');
+    SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, 'https://nyc3.digitaloceanspaces.com/archeio/sdk/common/audio/reconnected.mp3');
 
     SendBirdCall.addListener(1, {
       onRinging: (_call) => {
@@ -109,18 +109,30 @@ window.app = {
   attachCallEvents() {
     this.call.onEstablished = (__call) => {
       console.log('Information: call stablished!', __call);
+
+      // stop the microphone and camera
+      this.call.muteMicrophone();
+      this.call.stopVideo();
     };
 
     this.call.onConnected = (__call) => {
       console.log('Information: call connected!', __call);
       this.config.status = 'ongoing';
       this.tpl();
+
+      this.call.unmuteMicrophone();
+
       __.qs('#ongoing_call').classList.add('active');
     };
 
     this.call.onEnded = (__call) => {
       console.log('Information: call ended!', __call);
       __.qs('#ongoing_call').classList.remove('active');
+
+      // stop the microphone and camera
+      this.call.muteMicrophone();
+      this.call.stopVideo();
+
       this.config.status = 'ready';
       this.tpl();
     };
