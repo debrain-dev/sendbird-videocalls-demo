@@ -507,18 +507,8 @@ window.app = {
       _this4.tpl();
 
       setTimeout(function () {
-        // stop the microphone and camera
-        var video = document.querySelectorAll('video');
-        video.forEach(function (v) {
-          console.log('entro');
-          var mediaStream = v.srcObject;
-          var tracks = mediaStream.getTracks();
-          tracks.forEach(function (track) {
-            return track.stop();
-          });
-          delete _this4.call;
-        });
-      }, 3000);
+        document.location.reload();
+      }, 1000);
     };
 
     this.call.onRemoteAudioSettingsChanged = function (__call) {
