@@ -491,6 +491,8 @@ window.app = {
       ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('active');
 
       if (_this4.isSafari()) {
+        ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#ongoing_call').classList.add('safari');
+
         ___WEBPACK_IMPORTED_MODULE_2__["default"].qs('#remote_video').play();
       }
     };

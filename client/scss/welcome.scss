@@ -283,6 +283,10 @@ body{
   display: none;
   max-width: 640px;
 
+  #local_video{
+    display: none;
+  }
+
   &.active{
     display: block;
   }

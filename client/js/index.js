@@ -132,6 +132,7 @@ window.app = {
       __.qs('#ongoing_call').classList.add('active');
 
       if (this.isSafari()) {
+        __.qs('#ongoing_call').classList.add('safari');
         __.qs('#remote_video').play();
       }
     };
