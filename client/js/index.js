@@ -147,6 +147,8 @@ window.app = {
           const mediaStream = v.srcObject;
           const tracks = mediaStream.getTracks();
           tracks.forEach((track) => track.stop());
+
+          delete this.call;
         });
 
       }, 3000);

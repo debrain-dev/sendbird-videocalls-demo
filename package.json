@@ -76,7 +76,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "s3-uploader": "^2.0.3",
-    "sendbird-calls": "^1.5.1",
+    "sendbird-calls": "1.4.1",
     "sendgrid": "^5.2.3",
     "sha1": "^1.1.1",
     "sharp": "^0.23.4",
